@@ -1,4 +1,4 @@
-resource "aws_vpc" "main" {
+resource "aws_vpc" "keycloak_vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -8,9 +8,9 @@ resource "aws_vpc" "main" {
   }
 }
 
-resource "aws_subnet" "public" {
+resource "aws_subnet" "keycloak_subnet_public" {
   count             = 2
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.keycloak_vpc.id
   cidr_block        = "10.0.${count.index + 1}.0/24"
   availability_zone = "us-east-1${count.index == 0 ? "a" : "b"}"
 
@@ -19,9 +19,9 @@ resource "aws_subnet" "public" {
   }
 }
 
-resource "aws_subnet" "private" {
+resource "aws_subnet" "keycloak_subnet_private" {
   count             = 2
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.keycloak_vpc.id
   cidr_block        = "10.0.${count.index + 10}.0/24"
   availability_zone = "us-east-1${count.index == 0 ? "a" : "b"}"
 

@@ -1,7 +1,7 @@
-resource "aws_security_group" "keycloak" {
+resource "aws_security_group" "keycloak_security_group" {
   name        = "keycloak-sg"
   description = "Security group for Keycloak"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = aws_vpc.keycloak_vpc.id
 
   ingress {
     from_port   = 8080
@@ -18,15 +18,15 @@ resource "aws_security_group" "keycloak" {
   }
 }
 
-resource "aws_security_group" "database" {
+resource "aws_security_group" "keycloak_database_security_group" {
   name        = "keycloak-db-sg"
   description = "Security group for Keycloak database"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = aws_vpc.keycloak_vpc.id
 
   ingress {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
-    security_groups = [aws_security_group.keycloak.id]
+    security_groups = [aws_security_group.keycloak_security_group.id]
   }
 }
