@@ -1,0 +1,27 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+
+# Local Terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# Backup files
+*.backup
+*.bak
+
+# IDE and editor files
+*.swp
+*.swo
+*.DS_Store
+*.idea/
+.vscode/
+*.iml
+
+# Operating system files
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
