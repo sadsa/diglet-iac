@@ -15,6 +15,8 @@ resource "aws_ecs_task_definition" "keycloak" {
     {
       name  = "keycloak"
       image = "quay.io/keycloak/keycloak:latest"
+      entryPoint = ["kc.sh"]
+      command = ["start"]
       portMappings = [
         {
           containerPort = 8080
@@ -29,7 +31,7 @@ resource "aws_ecs_task_definition" "keycloak" {
         },
         {
           name  = "KC_DB_URL"
-          value = aws_db_instance.keycloak.endpoint
+          value = "jdbc:postgresql://${aws_db_instance.keycloak.endpoint}/keycloak"
         },
         {
           name  = "KC_DB_USERNAME"

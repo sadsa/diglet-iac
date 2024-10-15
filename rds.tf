@@ -5,6 +5,7 @@ resource "aws_db_instance" "keycloak" {
   engine              = "postgres"
   engine_version      = "14"
   instance_class      = "db.t3.micro"
+  db_name             = "keycloak"
   username            = "keycloak"
   password            = "keycloak123"  # Change this in production
   skip_final_snapshot = true
